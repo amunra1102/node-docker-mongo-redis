@@ -3,6 +3,9 @@ version: '3'
 networks:
   common:
 
+volumes:
+  mongo-db:
+
 services:
   node-app:
     build:
@@ -12,5 +15,16 @@ services:
       - 3300:3000
     environment:
       - PORT=3000
+    networks:
+      - common
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=devuser
+      - MONGO_INITDB_ROOT_PASSWORD=gcsvn123
+    volumes:
+      - mongo-db:/data/db
     networks:
       - common
