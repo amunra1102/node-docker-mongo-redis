@@ -1,3 +1,5 @@
+# OS: MACOS
+
 # docker build -t node-image .
 
 # docker run -v $(pwd):/app -v /app/node_modules -d -p 3300:3000 --name node-app node-image
@@ -15,3 +17,7 @@
 ## docker-compose up -d
 
 ## docker-compose down -v
+
+## docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+
+## docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d

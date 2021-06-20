@@ -10,7 +10,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3300:3000
+    volumes:
+      - .:/app
+      - /app/node_modules
     environment:
       - PORT=3000
+    # env_file:
+    #   - ./.env
     networks:
       - common
