@@ -11,14 +11,22 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - 3300:3000
     environment:
       - PORT=3000
     networks:
       - common
     depends_on:
       - mongo
+
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - 3000:80
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - common
 
   mongo:
     container_name: mongo

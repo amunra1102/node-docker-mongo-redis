@@ -34,10 +34,12 @@ let redisClient = redis.createClient({
 const app = express();
 app.use(express.json());
 
-app.get('/', (req, res) => {
+app.get('/api/v1', (req, res) => {
+    console.log('TEST APP SCALE');
     res.json({ data: 'Hello World!!!' });
 });
 
+app.enable('trust proxy');
 app.use(session({
     store: new RedisStore({ client: redisClient }),
     secret: SESSION_SECRET,
