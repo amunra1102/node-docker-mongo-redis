@@ -17,6 +17,8 @@ services:
       - PORT=3000
     networks:
       - common
+    depends_on:
+      - mongo
 
   mongo:
     container_name: mongo
