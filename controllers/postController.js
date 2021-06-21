@@ -9,13 +9,13 @@ exports.getAllPosts = async (req, res, next) => {
             data: {
                 posts
             }
-        })
+        });
     } catch (error) {
         res.status(400).json({
             status: 'error',
-        })
+        });
     }
-}
+};
 
 exports.getOnePost = async (req, res, next) => {
     try {
