@@ -8,6 +8,7 @@ volumes:
 
 services:
   node-app:
+    image: amunra1102/node-mongo-redis-app
     build:
       context: .
       dockerfile: Dockerfile
