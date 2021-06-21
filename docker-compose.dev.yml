@@ -13,6 +13,7 @@ services:
       - NODE_ENV=development
       - MONGO_USER=devuser
       - MONGO_PASSWORD=gcsvn123
+      - SESSION_SECRET=secret
     command: npm run dev
   mongo:
     environment:

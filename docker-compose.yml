@@ -30,3 +30,9 @@ services:
       - mongo-db:/data/db
     networks:
       - common
+
+  redis:
+    container_name: redis
+    image: redis
+    networks:
+      - common

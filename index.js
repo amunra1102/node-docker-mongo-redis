@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const redis = require('redis');
 
-const { PORT, MONGO_USER, MONGO_PASSWORD, MONGO_IP, MONGO_PORT } = require('./config');
+const { PORT, MONGO_USER, MONGO_PASSWORD, MONGO_IP, MONGO_PORT, REDIS_URL, REDIS_PORT, SESSION_SECRET } = require('./config');
 
 const postRouter = require('./routes/postRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -23,12 +25,30 @@ const connectWithRetry = () => {
 
 connectWithRetry();
 
+let RedisStore = require('connect-redis')(session);
+let redisClient = redis.createClient({
+    host: REDIS_URL,
+    port: REDIS_PORT
+});
+
 const app = express();
 app.use(express.json());
 
 app.get('/', (req, res) => {
     res.json({ data: 'Hello World!!!' });
 });
+
+app.use(session({
+    store: new RedisStore({ client: redisClient }),
+    secret: SESSION_SECRET,
+    cookie: {
+        secure: false,
+        resave: false,
+        saveUninitialized: false,
+        httpOnly: true,
+        maxAge: 6000
+    }
+}));
 
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
