@@ -25,3 +25,15 @@
 # scale:
 
 ## docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d --scale node-app=2
+
+# docker hub
+
+## docker login
+
+## docker image tag node-docker-mongo-redis_node-app amunra1102/node-mongo-redis-app
+
+## docker push amunra1102/node-mongo-redis-app
+
+## docker-compose -f docker-compose.yml -f docker-compose.prod.yml build node-app
+
+## docker-compose -f docker-compose.yml -f docker-compose.prod.yml push node-app
